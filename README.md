@@ -74,6 +74,19 @@ Contribution au risque total :
 
 ---
 
+## 🧪 Résultats hors-échantillon (OOS
+| Portefeuille | Rendement annuel | Volatilité annuelle | Sharpe |
+|--------------|------------------|---------------------|--------|
+| Équipondéré (1/N) | 7,78 % | 15,53 % | -0.276 |
+| GMV | -4.19 % | 13.34 % | -0,576 |
+| Tangence | -2.33 % | 18,22 % | -0,064 |
+
+Résultat clé : 
++ Le portefeuille équipondéré apparaît comme le plus robuste sur la période de test
++ Les portefeuilles optimisés (GMV et tangence) sont plus sensibles au changement de régime de marché. 
+
+---
+
 ## 🧪 Résultats Out-of-Sample (2022–2026)
 | Portefeuille | Rendement annuel | Volatilité annuelle | Sharpe |
 |--------------|------------------|---------------------|--------|
