@@ -1,5 +1,5 @@
-# 📊 Optimisation de Portefeuille — Actions Européennes  
-## Markowitz, CML & Random Forest (2015–2026)
+# 📊 Portfolio Allocation & Risk Dashboard — European Equities  
+## Streamlit, Markowitz, Risk Analytics, Stock Screener & Random Forest
 
 Auteur : Nguyen Hoang Phuc PHAN  
 Master 1 MBFA – Ingénierie Économique et Financière  
@@ -8,130 +8,196 @@ Université de Rennes
 ---
 
 ## 📌 Présentation
-Ce projet met en œuvre un cadre complet d’optimisation de portefeuille sur un univers de 20 grandes actions européennes (France, Allemagne, Pays-Bas, Suisse) sur la période 2015–2026.
-L’objectif est d’évaluer empiriquement la performance in-sample et la robustesse out-of-sample du modèle moyenne-variance de Markowitz, en comparaison avec une extension en Machine Learning (Random Forest).
+
+Ce projet développe un dashboard interactif d’allocation de portefeuille et d’analyse du risque appliqué à un univers d’actions européennes.  
+L’objectif est de transformer une analyse académique de type Markowitz en un outil dynamique d’aide à la décision en asset management.
+
+Le dashboard permet de sélectionner un univers d’actions, de récupérer automatiquement les données de marché via Yahoo Finance, de comparer plusieurs stratégies d’allocation, d’évaluer leur performance ajustée du risque et de tester leur robustesse hors-échantillon.
 
 ---
 
-## 📂 Contenu du dépôt
-- Téléchargement des données (Yahoo Finance)  
-- Calcul des rendements logarithmiques  
-- Estimation de la matrice de covariance (Σ)  
-- Frontière efficiente (Markowitz)  
-- Portefeuille GMV (Minimum Variance)  
-- Portefeuille de tangence (Max Sharpe)  
-- Capital Market Line (CML)  
-- Analyse de Risk Contribution  
-- Backtest Out-of-Sample (2022–2026)  
-- Extension Random Forest (μ_RF)  
+## 🚀 Fonctionnalités principales
+
+### 1. Univers d’investissement dynamique
+- Recherche et ajout de tickers via Yahoo Finance
+- Gestion manuelle de l’univers d’investissement
+- Base initiale de 20 grandes actions européennes
+- Récupération automatique des informations entreprises : secteur, industrie, pays, devise, exchange
+
+### 2. Market Data
+- Téléchargement des prix ajustés
+- Calcul des rendements logarithmiques
+- Prix normalisés base 100
+- Rendements et volatilités annualisés
+- Matrice de corrélation des rendements
+
+### 3. Company Intelligence
+- Données fondamentales : market cap, enterprise value, P/E, P/B, beta
+- Profitabilité : margin, ROA, ROE, revenue growth
+- Structure financière : dette, cash, debt-to-equity, current ratio, free cash flow
+- Dividend & analyst view
+- Actualités récentes via Yahoo Finance
+
+### 4. Price Action, Volume & Liquidity
+- Graphique chandeliers japonais (OHLC)
+- Volumes échangés et volume moyen 20 jours
+- Moyennes mobiles SMA 20, SMA 50 et SMA 200
+- Lecture automatique de la tendance prix-volume
+- Snapshot bid-ask et interprétation indicative de la liquidité
+
+### 5. Stock Screener
+- Score composite combinant :
+  - Momentum
+  - Risque
+  - Qualité fondamentale
+  - Valorisation
+- Classement des actions de l’univers
+- Top candidates
+- High-risk watchlist
+- Décomposition du score par dimension
+
+### 6. Stratégies d’allocation
+Stratégies comparées :
+- Equal Weight
+- Global Minimum Variance (GMV)
+- Tangency Portfolio
+- Risk Parity
+
+Indicateurs calculés :
+- Rendement annualisé
+- Volatilité annualisée
+- Sharpe Ratio
+- Maximum Drawdown
+- Pondérations par stratégie
+- Performance cumulée
+- Drawdown des portefeuilles
+
+### 7. Efficient Frontier & Capital Market Line
+- Simulation de portefeuilles aléatoires
+- Frontière efficiente
+- Portefeuille de tangence
+- Capital Market Line
+- Visualisation interactive du couple rendement-risque
+
+### 8. Backtest Out-of-Sample
+- Séparation train/test
+- Estimation des poids sur la période d’apprentissage
+- Application hors-échantillon
+- Comparaison des performances OOS
+- Analyse de la robustesse des allocations
+
+### 9. Benchmark Comparison
+- Comparaison avec un benchmark de marché
+- Tracking Error
+- Information Ratio
+- Beta
+- Corrélation
+- Performance active cumulée
+- Overlay de performance relative par action
+
+### 10. Risk Dashboard
+- VaR historique
+- CVaR
+- Maximum Drawdown
+- Rolling volatility
+- Rolling Sharpe Ratio
+- Distribution des rendements
+- Contribution au risque
+- Indice de concentration HHI
+- Nombre effectif d’actifs
+
+### 11. Sector & Country Exposure
+- Analyse des expositions par secteur
+- Analyse des expositions par industrie
+- Analyse des expositions par pays
+- Comparaison des expositions selon les stratégies
+- Holdings breakdown
+
+### 12. Stress Test
+- Analyse pendant des périodes de crise
+- Scénarios intégrés :
+  - Covid Crash 2020
+  - Inflation & Rate Shock 2022
+  - Post-Covid Recovery 2021
+  - Période personnalisée
+- Performance, drawdown, VaR/CVaR et volatilité pendant les périodes de stress
+
+### 13. Machine Learning Extension
+- Modèle Random Forest pour prédire les rendements mensuels attendus
+- Construction d’un portefeuille Tangency RF
+- Comparaison avec les anticipations historiques
+- Backtest hors-échantillon des stratégies ML
+- Analyse de la concentration des portefeuilles
 
 ---
 
 ## 🧠 Méthodologie
-Stratégies comparées :
-- Portefeuille équipondéré (1/N)  
-- Global Minimum Variance (GMV)  
-- Portefeuille de tangence (Sharpe maximal)  
-- Tangence avec rendements prédits (Random Forest)  
 
-Cadre quantitatif :
-- Optimisation moyenne-variance (Markowitz)  
-- Programmation quadratique (quadprog)  
-- Taux sans risque : OAT ≈ 3,5 %  
-- Période d’entraînement : 2015–2021  
-- Période de test (OOS) : 2022–2026  
+Le projet combine une approche quantitative classique d’allocation d’actifs avec des modules de data analytics et de machine learning.
 
----
+### Approche portfolio management
+- Optimisation moyenne-variance de Markowitz
+- Portefeuille de variance minimale globale
+- Portefeuille de tangence
+- Risk Parity
+- Analyse rendement-risque
+- Contribution au risque
+- Backtesting hors-échantillon
 
-## 📈 Résultats In-Sample
-| Portefeuille | Rendement annuel | Volatilité annuelle | Sharpe |
-|--------------|------------------|---------------------|--------|
-| Équipondéré (1/N) | 10,9 % | 18,2 % | 0,406 |
-| GMV | 6,18 % | 13,8 % | 0,194 |
-| Tangence | 15,3 % | 18,5 % | 0,640 |
+### Approche market intelligence
+- Analyse des prix et volumes
+- Moyennes mobiles
+- Bid-ask spread
+- Lecture de la liquidité
+- Données fondamentales et sectorielles
 
-Le portefeuille de tangence maximise le ratio de Sharpe et se situe sur la frontière efficiente.
-
----
-
-## ⚖️ Allocation & Concentration du portefeuille
-- 1/N : diversification homogène (~5 % par actif)  
-- GMV : portefeuille défensif (fort poids sur Nestlé, Orange, Sanofi)  
-- Tangence : portefeuille concentré (ASML, Thales, LVMH)  
-
-L’optimisation améliore le couple rendement-risque mais réduit la diversification effective.
-
----
-
-## 🔍 Risk Contribution (Portefeuille de Tangence)
-Contribution au risque total :
-- Thales ≈ 35,5 %  
-- ASML ≈ 29,4 %  
-- LVMH ≈ 12 %  
-- Orange ≈ 12 %  
-
-➡️ La maximisation du Sharpe conduit à une forte concentration du risque sur quelques actifs dominants.
-
----
-
-## 🧪 Résultats hors-échantillon (OOS
-| Portefeuille | Rendement annuel | Volatilité annuelle | Sharpe |
-|--------------|------------------|---------------------|--------|
-| Équipondéré (1/N) | 7,78 % | 15,53 % | -0.276 |
-| GMV | -4.19 % | 13.34 % | -0,576 |
-| Tangence | -2.33 % | 18,22 % | -0,064 |
-
-Résultat clé : 
-+ Le portefeuille équipondéré apparaît comme le plus robuste sur la période de test
-+ Les portefeuilles optimisés (GMV et tangence) sont plus sensibles au changement de régime de marché. 
-
----
-
-## 🧪 Résultats Out-of-Sample (2022–2026)
-| Portefeuille | Rendement annuel | Volatilité annuelle | Sharpe |
-|--------------|------------------|---------------------|--------|
-| Équipondéré (1/N) | 7,75 % | 13,32 % | 0,319 |
-| GMV | -2,30 % | 11,80 % | -0,469 |
-| Tangence (historique) | -0,17 % | 25,00 % | -0,147 |
-| Tangence (Random Forest) | -0,36 % | 12,80 % | -0,301 |
-
-Résultat clé : la stratégie équipondérée (1/N) apparaît comme la plus robuste hors-échantillon.
-
----
-
-## 🤖 Extension Machine Learning — Random Forest
-- Prédiction des rendements attendus (μ_RF)  
-- Portefeuilles plus concentrés  
-- Dispersion élevée des prévisions  
-- Amélioration limitée des performances OOS  
-
-Les résultats confirment la difficulté structurelle de la prévision des rendements financiers.
+### Approche machine learning
+- Features : rendements retardés, volatilité passée
+- Target : rendement mensuel suivant
+- Modèle : Random Forest Regressor
+- Objectif : comparer les rendements attendus historiques aux rendements attendus prédits
 
 ---
 
 ## 🛠️ Langage & Outils
-Langage : **R**  
+
+Langage : **Python**
 
 Packages principaux :
-- quantmod  
-- quadprog  
-- PerformanceAnalytics  
-- randomForest  
-- ggplot2  
-- tidyverse  
+- streamlit
+- yfinance
+- pandas
+- numpy
+- plotly
+- scipy
+- scikit-learn
+- requests
 
 ---
 
 ## 📊 Enseignements financiers
-- Markowitz performant in-sample mais instable out-of-sample  
-- Forte sensibilité aux erreurs d’estimation (μ, Σ)  
-- Concentration du risque dans le portefeuille de tangence  
-- La diversification naïve (1/N) est empiriquement plus robuste  
-- Le Machine Learning ne surperforme pas systématiquement en allocation d’actifs  
+
+- Les portefeuilles optimisés peuvent améliorer le couple rendement-risque in-sample, mais restent sensibles aux erreurs d’estimation.
+- Le portefeuille de tangence peut générer une forte concentration sur quelques actifs.
+- Le backtest hors-échantillon est indispensable pour évaluer la robustesse réelle d’une allocation.
+- L’analyse du risque ne doit pas se limiter à la volatilité : VaR, CVaR, drawdown, rolling Sharpe et contribution au risque apportent une lecture plus complète.
+- Les volumes, les chandeliers et le bid-ask enrichissent l’analyse fondamentale par une lecture de marché plus opérationnelle.
+- Le Machine Learning peut modifier les anticipations de rendement, mais ne garantit pas une surperformance hors-échantillon.
+
+---
+
+## ⚠️ Limites
+
+Ce dashboard est un outil pédagogique et analytique.  
+Les données proviennent principalement de Yahoo Finance et peuvent être incomplètes, différées ou indisponibles selon les tickers.
+
+Les interprétations automatiques ne constituent pas une recommandation d’investissement.  
+Les résultats doivent être complétés par une analyse qualitative, sectorielle et macroéconomique.
 
 ---
 
 ## 👤 Auteur
+
 Nguyen Hoang Phuc PHAN  
-M1 MBFA – Finance Quantitative & Asset Allocation  
-Université de Rennes
+M1 MBFA – Ingénierie Économique et Financière  
+Université de Rennes  
