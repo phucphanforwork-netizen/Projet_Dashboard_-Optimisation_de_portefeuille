@@ -16,7 +16,7 @@ Le dashboard permet de sélectionner un univers d’actions, de récupérer auto
 
 ---
 
-[![Dashboard Preview](Dashboard%20preview.png)]([https://drive.google.com/file/d/1fyIUkpbLfpsNUjMcsblwC8yr-YoxL47B/view?usp=sharing])
+[![Dashboard Preview](dashboard_preview.png)](https://drive.google.com/file/d/1fyIUkpbLfpsNUjMcsblwC8yr-YoxL47B/view?usp=sharing)
 
 ---
 ## 🚀 Fonctionnalités principales
