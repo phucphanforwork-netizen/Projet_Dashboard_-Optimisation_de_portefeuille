@@ -16,6 +16,9 @@ Le dashboard permet de sélectionner un univers d’actions, de récupérer auto
 
 ---
 
+[![Dashboard Preview](dashboard_preview.png)](https://drive.google.com/file/d/1gUK-Xaq838_UsbAAC1_HJimP9rix6NIf/view?usp=sharing)
+
+---
 ## 🚀 Fonctionnalités principales
 
 ### 1. Univers d’investissement dynamique
